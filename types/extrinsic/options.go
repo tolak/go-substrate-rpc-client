@@ -27,9 +27,15 @@ func WithNonce(nonce types.UCompact) SigningOption {
 }
 
 // WithMetadataMode returns a SigningOption that is used to add the check metadata mode and hash to a Payload.
-func WithMetadataMode(mode extensions.CheckMetadataMode, metadataHash extensions.CheckMetadataHash) SigningOption {
+func WithMetadataMode(mode extensions.CheckMetadataMode) SigningOption {
 	return func(vals SignedFieldValues) {
 		vals[CheckMetadataHashModeSignedField] = mode
+	}
+}
+
+// WithMetadataHash returns a SigningOption that is used to add the metadata hash to a Payload.
+func WithMetadataHash(metadataHash extensions.CheckMetadataHash) SigningOption {
+	return func(vals SignedFieldValues) {
 		vals[CheckMetadataHashSignedField] = metadataHash
 	}
 }
